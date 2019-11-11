@@ -9,6 +9,6 @@ Antonio Herrera
 
 Rafael Montes
 
-Samuel Valverde Garcia
+Samuel Valverde
 
 ![alt text](https://aasnova.org/wp-content/uploads/2016/11/fig13.jpg)
