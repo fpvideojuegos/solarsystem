@@ -8,5 +8,3 @@ Nicolás Lerible
 Antonio Herrera
 
 Rafael Montes
-
-Er Zamueh
