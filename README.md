@@ -1,7 +1,7 @@
 # solarsystem
 Space Shooter Solar System
 
-Integrantes:
+Members of the team:
 
 Nicolás Lerible
 
