@@ -1,5 +1,5 @@
 # solarsystem
-Space Shooter Solar System
+**Space Shooter Solar System**
 
 **Members of the team:**
 
