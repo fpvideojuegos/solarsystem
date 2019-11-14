@@ -1,0 +1,36 @@
+Menu:
+- Levels
+    +( Planets )
+- Multiplayer
+    +( 1/2 Players )
+- Shop
+    +
+- Music
+    +( MainTheme )
+
+Level-Intro:
+- Info
+    +( Planet Info )
+
+Level:
+- PlayerGroup
+    - Score
+    -Player
+      - Bullets
+      - Lives
+      - Speed
+      
+- EnemyGroup
+  - Boss
+  - Asteroids
+  - Aliens
+
+- PowerUps
+  - Lives
+  - Shoot
+
+- Level-enviroment
+
+- Music
+
+- Audio
