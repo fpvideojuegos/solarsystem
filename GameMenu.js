@@ -9,8 +9,8 @@ class GameMenu extends Phaser.Scene {
        /* menuButton.setInteractive().on('pointerdown', () => { 
             this.scene.start("playGame");
         }); */
-        this.button1 = this.add.bitmapText(10, 200, "pixelFont", "1 Player" , 30); 
-        this.button2 = this.add.bitmapText(140, 200, "pixelFont", "2 Player" , 30); 
+        this.button1 = this.add.bitmapText(10, 200, "Fuente", "1 Player" , 30); 
+        this.button2 = this.add.bitmapText(140, 200, "Fuente", "2 Player" , 30); 
 
         this.button1.setInteractive().on('pointerdown', () => { 
           this.scene.launch('HUD');
