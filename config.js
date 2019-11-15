@@ -5,8 +5,8 @@ var gameSettings = {
   }
   
   var config = {
-    width: 300,
-    height: 400,
+    width: 500,
+    height: 700,
     backgroundColor: 0x000000 ,
     scene: [Preload, Nivel1],
     pixelArt: true,
