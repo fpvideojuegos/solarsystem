@@ -8,7 +8,7 @@ var gameSettings = {
     width: 500,
     height: 700,
     backgroundColor: 0x000000 ,
-    scene: [Preload, GameMenu, Level1],
+    scene: [Preload, Level1, GameMenu],
     pixelArt: true,
     physics: {
       default: "arcade",

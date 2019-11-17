@@ -6,9 +6,8 @@ class Preload extends Phaser.Scene {
     ///////////  PRECARGA  ///////////
     preload() {
 
-        /*Imagen Background
-        this.load.image("Back01", "assets/images/Back01.png");
-        */
+        //Imagen Background
+        this.load.image("Back", "assets/images/Back.png");
 
 
         /*Crea la barra de carga
@@ -30,12 +29,11 @@ class Preload extends Phaser.Scene {
         */
 
 
-        /*Plantilla creacion de sprites
-        this.load.spritesheet("NombreSprite", "assets/spritesheets/imagen.png",{
-            frameWidth: 128,  // Ancho
-            frameHeight: 20   // Largo
+        //Plantilla creacion de sprites
+        this.load.spritesheet("player", "assets/spritesheets/player.png",{
+            frameWidth: 32,  // Ancho
+            frameHeight: 48   // Largo
         });
-        */
 
         /*Plantilla Audios
         this.load.audio("NombreAudio", ["assets/sounds/Audio.ogg", "assets/sounds/Audio.mp3"]);
@@ -50,18 +48,17 @@ class Preload extends Phaser.Scene {
     ///////////  CREACION  ///////////
     create() {
         
-        this.scene.start("GameMenu"); //Primera escena del juego
+        this.scene.start("Level1"); //Primera escena del juego
 
-        /*Plantilla Animación
+        //Animación Player 1
         this.anims.create({
-            key: "",                                             //Nombre de la animación
-            frames: this.anims.generateFrameNumbers("player", {  //Nombre del sprite
+            key: "Player",                                             //Nombre de la animación
+            frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
                 start: 0,
                 end: 1,
             }),
             frameRate: 20,  //frames por segundo
             repeat: -1      //Infinito
         });
-        */
     }
 }

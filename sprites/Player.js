@@ -6,12 +6,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     config.scene.physics.world.enable(this);
     config.scene.add.existing(this);
 
-    this.play("thrust");
+    this.play("Player");
     this.body.setCollideWorldBounds(true);
 
     this.lives = 3;
 
-    config.scene.players.add(this);
+    //config.scene.players.add(this);
 
     this.type = config.type;
 
