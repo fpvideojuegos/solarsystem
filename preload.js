@@ -38,7 +38,7 @@ class Preload extends Phaser.Scene {
             frameHeight: 16
         });
 
-        //Menu Audios
+        //Menu Audio
         this.load.audio("menuMusic", ["assets/sounds/menu_music.ogg", "assets/sounds/menu_music.mp3"]);
         
         /* Fuente pixelada "Fuente"
@@ -48,12 +48,12 @@ class Preload extends Phaser.Scene {
     } //FINAL PRELOAD
 
 
-    ///////////  CREACION  ///////////
+    ///////////  CREATE  ///////////
     create() {
         
         this.scene.start("Level1"); //Primera escena del juego
 
-        //Animación Player rojo
+        //Animation player red
         this.anims.create({
             key: "playerR",
             frames: this.anims.generateFrameNumbers("player", { 
@@ -64,7 +64,7 @@ class Preload extends Phaser.Scene {
             repeat: -1
         });
 
-        //Animación Player verde
+        //Animation player green
         this.anims.create({
             key: "playerG",
             frames: this.anims.generateFrameNumbers("player", {
@@ -75,7 +75,7 @@ class Preload extends Phaser.Scene {
             repeat: -1
         });
 
-        //Animación Ship
+        //Ship Animation
         this.anims.create({
             key: "ship",                                             
             frames: this.anims.generateFrameNumbers("ship", { 
