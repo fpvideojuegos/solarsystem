@@ -5,7 +5,6 @@ class Preload extends Phaser.Scene {
 
     ///////////  PRECARGA  ///////////
     preload() {
-
         //Imagen Background
         this.load.image("Back", "assets/images/Back.png");
 
@@ -40,7 +39,8 @@ class Preload extends Phaser.Scene {
         */
         
         // Fuente pixelada "Fuente" (Cambiar)
-        this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
+     //   this.textBoxNameVariable.setFontFamily('Fuente');
+      //  this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
         
     } //FINAL PRELOAD
 
