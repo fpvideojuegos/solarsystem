@@ -10,7 +10,7 @@ class Preload extends Phaser.Scene {
         this.load.image("Back", "assets/images/Back.png");
 
 
-        /*Crea la barra de carga
+        //Crea la barra de carga
         this.fullBar = this.add.graphics();
         this.fullBar.fillStyle(0x660066, 1);
         this.fullBar.fillRect((this.cameras.main.width / 4)-2,(this.cameras.main.height /2) - 18, (this.cameras.main.width / 2) + 4, 20);
@@ -26,13 +26,13 @@ class Preload extends Phaser.Scene {
             this.progress.destroy();
             this.fullBar.destroy();
         }, this);
-        */
+        //
 
 
         //Plantilla creacion de sprites
         this.load.spritesheet("player", "assets/spritesheets/player.png",{
-            frameWidth: 32,  // Ancho
-            frameHeight: 48   // Largo
+            frameWidth: 16,  // Ancho
+            frameHeight: 24   // Largo
         });
 
         /*Plantilla Audios
@@ -52,7 +52,7 @@ class Preload extends Phaser.Scene {
 
         //Animación Player 1
         this.anims.create({
-            key: "Player",                                             //Nombre de la animación
+            key: "player",                                             //Nombre de la animación
             frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
                 start: 0,
                 end: 1,
