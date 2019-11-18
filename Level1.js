@@ -11,18 +11,26 @@ class Level1 extends Phaser.Scene {
     this.player = this.add.group();
 
     //Player 1
-    this.player1 = new Player({
+    this.player = new Player({
       scene: this,
       x: config.width / 2 - 50,
       y: config.height / 2,
       key: "player",
-      anim: "player"
+      anim: "playerR"
     });
 
+    //Controles Player 1
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+
+    
   }  //Fin del Create
 
 
   update() {
     this.Background.tilePositionY -= 0.3;
+    
+    //Controla el movimiento de los jugadores
+    this.player.movePlayerManager();
+  
   }  //Fin del Update
 }

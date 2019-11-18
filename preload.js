@@ -29,10 +29,16 @@ class Preload extends Phaser.Scene {
         //
 
 
-        //Plantilla creacion de sprites
+        //Player
         this.load.spritesheet("player", "assets/spritesheets/player.png",{
             frameWidth: 16,  // Ancho
             frameHeight: 24   // Largo
+        });
+
+        //Enemy
+        this.load.spritesheet("ship", "assets/spritesheets/player.png",{
+            frameWidth: 16,  // Ancho
+            frameHeight: 16   // Largo
         });
 
         /*Plantilla Audios
@@ -50,12 +56,23 @@ class Preload extends Phaser.Scene {
         
         this.scene.start("Level1"); //Primera escena del juego
 
-        //Animación Player 1
+        //Animación Player rojo
         this.anims.create({
-            key: "player",                                             //Nombre de la animación
+            key: "playerR",                                             //Nombre de la animación
             frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
                 start: 0,
                 end: 1,
+            }),
+            frameRate: 20,  //frames por segundo
+            repeat: -1      //Infinito
+        });
+
+        //Animación Player verde
+        this.anims.create({
+            key: "playerG",                                             //Nombre de la animación
+            frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
+                start: 2,
+                end: 3,
             }),
             frameRate: 20,  //frames por segundo
             repeat: -1      //Infinito
