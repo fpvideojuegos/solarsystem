@@ -2,120 +2,109 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.key);
 
-    ///////////  PARAMETROS  ///////////        
-    //Nombre
+    //Set key name
     this.key = config.key;
-    //Velocidad
-    this.speed = 1;
-    //Vidas
-    this.lives = 3;
 
-    //Configuración
+    //Set physics and add to scene
     config.scene.physics.world.enable(this);
     config.scene.add.existing(this);
+
+    //Start with "Player" animation
+    this.play("player");
+
+    //Add collides
     this.body.setCollideWorldBounds(true);
 
-    //Animación especifica P1/P2
-    if (config.key == "player") {
-      this.play("player");
+    //Set lives
+    this.lives = 3;
+
+    //Add to group of ships
+    config.scene.ships.add(this);
+
+    //Set the mode for use 1p or 2p
+    this.type = config.type;
+
+    //Define keys for 1p or 2p
+    if (this.type == "coop") {
+
+      //Define for 1p
+      //Adding cursor keys
+      this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
+
+      //This key to shoot
+      this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+      //--------------------------------------------------------------------------------------//
+
+      //Define for 2p
+      //Adding keys WASD
+      this.WASD = this.scene.input.keyboard.addKeys({
+        WASD_UP: Phaser.Input.Keyboard.KeyCodes.W,
+        WASD_DOWN: Phaser.Input.Keyboard.KeyCodes.S,
+        WASD_LEFT: Phaser.Input.Keyboard.KeyCodes.A,
+        WASD_RIGHT: Phaser.Input.Keyboard.KeyCodes.D,
+      });
+
+      //This key to shoot
+      this.c = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);;
+
     } else {
-      this.play("friend");
-      this.setSize(16, 24);
-    }
 
+      this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
+      this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-  }
-
-  ///////////  FUNCIONES  ///////////        
-  //Actualiza la puntuación
-  updateScore(scene, pts){
-    this.score = this.score + pts;
-    scene.events.emit("scoreChange", this);
-  }
-  //Actualiza las vidas
-  updateLives(scene, hp){
-    this.lives = this.lives + (hp);
-    scene.events.emit("livesChange", this);
-  }
-
-  //Transparencia e inmunidad
-  hitted(scene, enemy) {
-    if (this.alpha == 1) {
-      enemy.resetShipPos();
-      if (this.alpha < 1) {
-        return;
-      }
-      this.alpha = 0.4;
-      var explosion = new Explosion(scene, this.x, this.y);
-      this.disableBody(true, true);
-
-      scene.time.addEvent({
-        delay: 1000,
-        callback: () => {
-          this.reset(scene);
-        },
-        callbackScope: this,
-        loop: false
-      });
-
-      this.updateLives(scene, -1)
     }
   }
 
-  //Animacion de aparición
-  reset(scene){
-    if (this.lives > 0) {
-      var x = config.width / 2 - 8;
-      var y = config.height + 64;
-      this.enableBody(true, x, y, true, true);
 
-      this.alpha = 0.5;
-      
-      var tween = scene.tweens.add({
-        targets: this,
-        y: config.height - 64,
-        ease: 'Power1',
-        duration: 1500,
-        repeat: 0,
-        onComplete: function () {
-          this.alpha = 1;
-        },
-        callbackScope: this
-      });
-    }
-  }
+      //Configure cursor key movements
+      movePlayerManagerCursorKeys() {
 
-  //Manejador de movimiento
-  movePlayerManager() {
-    this.body.setVelocity(0);
+        this.body.setVelocity(0);
 
-    if (this.key == "player") {                             //Movimiento Player 1
-      if (this.scene.cursorKeys.left.isDown) {                //Izquierda
-        this.body.setVelocityX(-gameSettings.playerSpeed);
-      } else if (this.scene.cursorKeys.right.isDown) {        //Derecha
-        this.body.setVelocityX(gameSettings.playerSpeed);
+        if (this.cursorKeys.left.isDown) {
+
+          this.body.setVelocityX(-gameSettings.playerSpeed);
+
+        } else if (this.cursorKeys.right.isDown) {
+
+          this.body.setVelocityX(gameSettings.playerSpeed);
+        }
+
+        if (this.cursorKeys.up.isDown) {
+
+          this.body.setVelocityY(-gameSettings.playerSpeed);
+
+        } else if (this.cursorKeys.down.isDown) {
+
+          this.body.setVelocityY(gameSettings.playerSpeed);
+
+        }
       }
-      if (this.scene.cursorKeys.up.isDown) {                  //Arriba
-        this.body.setVelocityY(-gameSettings.playerSpeed);
-      } else if (this.scene.cursorKeys.down.isDown) {         //Abajo
-        this.body.setVelocityY(gameSettings.playerSpeed);
+
+      //Configure WASD movements
+      movePlayerManagerWithWasd() {
+
+        this.body.setVelocity(0);
+
+        if (this.WASD.WASD_LEFT.isDown) {
+
+          this.body.setVelocityX(-gameSettings.playerSpeed);
+
+        } else if (this.WASD.WASD_RIGHT.isDown) {
+
+          this.body.setVelocityX(gameSettings.playerSpeed);
+
+        }
+
+        if (this.WASD.WASD_UP.isDown) {
+
+          this.body.setVelocityY(-gameSettings.playerSpeed);
+
+        } else if (this.WASD.WASD_DOWN.isDown) {
+
+          this.body.setVelocityY(gameSettings.playerSpeed);
+
+        }
       }
-    } else {                                                //Movimiento Player 2
-      if (this.scene.akey.isDown) {                           //Izquierda
-        this.body.setVelocityX(-gameSettings.playerSpeed);
-      } else if (this.scene.dkey.isDown) {                    //Derecha
-        this.body.setVelocityX(gameSettings.playerSpeed);
-      }
-      if (this.scene.wkey.isDown) {                           //Arriba
-        this.body.setVelocityY(-gameSettings.playerSpeed);
-      } else if (this.scene.skey.isDown) {                    //Abajo
-        this.body.setVelocityY(gameSettings.playerSpeed);
-      }
-    }
-  }  //Fin del manejador de movimiento
-}  //Fin de la clase
-
-
-
-
-
+    };

@@ -5,6 +5,7 @@ class Preload extends Phaser.Scene {
 
     ///////////  PRECARGA  ///////////
     preload() {
+
         //Imagen Background
         this.load.image("Back", "assets/images/Back.png");
 
@@ -39,8 +40,7 @@ class Preload extends Phaser.Scene {
         */
         
         // Fuente pixelada "Fuente" (Cambiar)
-     //   this.textBoxNameVariable.setFontFamily('Fuente');
-      //  this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
+        this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
         
     } //FINAL PRELOAD
 
@@ -48,7 +48,7 @@ class Preload extends Phaser.Scene {
     ///////////  CREACION  ///////////
     create() {
         
-        this.scene.start("Menu"); //Primera escena del juego
+        this.scene.start("Level1"); //Primera escena del juego
 
         //Animación Player 1
         this.anims.create({
