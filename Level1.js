@@ -11,9 +11,6 @@ class Level1 extends Phaser.Scene {
 
     this.Background = this.add.tileSprite(0, 0, config.width, config.height, "Back").setOrigin(0, 0);
 
-    const holaMundo = this.add.bitmapText(config.width / 2 - 90, config.height / 2, "Fuente", "Hello World", 40);
-    holaMundo.setTint(0x8888ff);  //azul claro
-
     //Grupo Player
     this.ships = this.add.group();
 
@@ -35,7 +32,7 @@ class Level1 extends Phaser.Scene {
 
   update() {
     this.Background.tilePositionY -= 0.3;
-    this.player1.movePlayerManagerCursorKeys();
+    this.player.movePlayerManagerCursorKeys();
 
   }  //Fin del Update
 }
