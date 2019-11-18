@@ -44,10 +44,7 @@ class Preload extends Phaser.Scene {
         /* Fuente pixelada "Fuente"
         this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
         */
-        
-        // Fuente pixelada "Fuente" (Cambiar)
-        this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
-        
+
     } //FINAL PRELOAD
 
 
@@ -58,24 +55,24 @@ class Preload extends Phaser.Scene {
 
         //Animación Player rojo
         this.anims.create({
-            key: "playerR",                                             //Nombre de la animación
-            frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
+            key: "playerR",
+            frames: this.anims.generateFrameNumbers("player", { 
                 start: 0,
                 end: 1,
             }),
-            frameRate: 20,  //frames por segundo
-            repeat: -1      //Infinito
+            frameRate: 20,
+            repeat: -1
         });
 
         //Animación Player verde
         this.anims.create({
-            key: "playerG",                                             //Nombre de la animación
-            frames: this.anims.generateFrameNumbers("player", {  //Nombre del spritesheet
+            key: "playerG",
+            frames: this.anims.generateFrameNumbers("player", {
                 start: 2,
                 end: 3,
             }),
-            frameRate: 20,  //frames por segundo
-            repeat: -1      //Infinito
+            frameRate: 20,
+            repeat: -1
         });
 
         //Animación Ship
