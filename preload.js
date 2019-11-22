@@ -59,7 +59,7 @@ class Preload extends Phaser.Scene {
     ///////////  CREATE  ///////////
     create() {
         
-        this.scene.start("Level1"); //Primera escena del juego
+        this.scene.start("GameMenu"); //Primera escena del juego
 
         //Animation player red
         this.anims.create({
