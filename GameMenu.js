@@ -1,6 +1,6 @@
 class GameMenu extends Phaser.Scene {
   constructor() {
-    super("GameMenu");     
+    super("Menu");     
   }
 
   create(){        

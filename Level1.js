@@ -3,7 +3,7 @@ class Level1 extends Phaser.Scene {
     super("Level1");
   }
 
-  init(mode){
+  init(mode) {
     this.mode = mode;
   }
 
@@ -26,6 +26,14 @@ class Level1 extends Phaser.Scene {
 
     this.music.play(musicConfig);
 
+    //Group of Ships
+    this.enemies = this.add.group();
+
+    this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" });
+
+
+
+
     //Grupo Player
     this.ships = this.add.group();
 
@@ -41,7 +49,7 @@ class Level1 extends Phaser.Scene {
     //Controles Player 1
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-    
+
   }  //Fin del Create
 
 

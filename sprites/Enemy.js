@@ -13,7 +13,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
     this.setInteractive();
 
-    config.scene.ships.add(this);
+    config.scene.enemies.add(this);
   }
 
   moveEnemy(speed) {

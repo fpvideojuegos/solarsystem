@@ -33,9 +33,9 @@ class Preload extends Phaser.Scene {
         });
 
         //Enemy Spritesheet
-        this.load.spritesheet("ship", "assets/spritesheets/player.png",{
-            frameWidth: 16,
-            frameHeight: 16
+        this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png",{
+            frameWidth: 24,
+            frameHeight: 24
         });
 
         ////AUDIO////
@@ -59,7 +59,7 @@ class Preload extends Phaser.Scene {
     ///////////  CREATE  ///////////
     create() {
         
-        this.scene.start("GameMenu"); //Primera escena del juego
+        this.scene.start("Menu"); //Primera escena del juego
 
         //Animation player red
         this.anims.create({
@@ -85,8 +85,8 @@ class Preload extends Phaser.Scene {
 
         //Ship Animation
         this.anims.create({
-            key: "ship",                                             
-            frames: this.anims.generateFrameNumbers("ship", { 
+            key: "Enemy",                                             
+            frames: this.anims.generateFrameNumbers("Enemy", { 
                 start: 0,
                 end: 1,
             }),
