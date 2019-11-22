@@ -29,7 +29,8 @@ class Level1 extends Phaser.Scene {
     //Group of Ships
     this.enemies = this.add.group();
 
-    this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" });
+    //Set the scale of the enemies
+    this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" }).setScale(2);
 
 
 
