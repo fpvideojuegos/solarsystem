@@ -38,8 +38,16 @@ class Preload extends Phaser.Scene {
             frameHeight: 16
         });
 
-        //Menu Audio
-        this.load.audio("menuMusic", ["assets/sounds/menu_music.ogg", "assets/sounds/menu_music.mp3"]);
+        ////AUDIO////
+        //Main Menu
+        this.load.audio("MusMenu", ["assets/sounds/Mus_Menu.ogg", "assets/sounds/Mus_Menu.mp3"]);
+        //Explosion Audio
+        this.load.audio("SndExplosion", ["assets/sounds/Snd_Explosion.ogg", "assets/sounds/Snd_Explosion.mp3"]);
+        //PowerUp Audio
+        this.load.audio("SndPowerup", ["assets/sounds/Snd_Powerup.ogg", "assets/sounds/Snd_Powerup.mp3"]);
+        //shoot Audio
+        this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
+        
         
         /* Fuente pixelada "Fuente"
         this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
