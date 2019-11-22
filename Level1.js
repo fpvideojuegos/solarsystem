@@ -12,7 +12,7 @@ class Level1 extends Phaser.Scene {
     this.Background = this.add.tileSprite(0, 0, config.width, config.height, "Back").setOrigin(0, 0);
 
     //Music
-    this.music = this.sound.add("menuMusic");
+    this.music = this.sound.add("MusMenu");
 
     var musicConfig = {
       mute: false,
