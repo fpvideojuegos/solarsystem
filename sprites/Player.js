@@ -19,7 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.lives = 3;
 
     //Add to group of ships
-    config.scene.ships.add(this);
+    config.scene.players.add(this);
 
     //Set the mode for use 1p or 2p
     this.type = config.type;

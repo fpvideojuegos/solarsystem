@@ -3,17 +3,12 @@ class Level1 extends Phaser.Scene {
     super("Level1");
   }
 
-  init(mode) {
-    this.mode = mode;
-  }
-
   create() {
 
+    ///// ASSETS //////
     this.Background = this.add.tileSprite(0, 0, config.width, config.height, "Back").setOrigin(0, 0);
-
     //Music
     this.music = this.sound.add("MusMenu");
-
     var musicConfig = {
       mute: false,
       volume: 1,
@@ -23,19 +18,27 @@ class Level1 extends Phaser.Scene {
       loop: false,
       delay: 0
     }
-
     this.music.play(musicConfig);
 
+    ///// GROUPS //////
     //Group of Ships
     this.enemies = this.add.group();
+    //Group of Players
+    this.players = this.add.group();
+    //Group of Shoots
+    this.shoots = this.add.group();
 
-    //Set the scale of the enemies
-    this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" }).setScale(2);
 
-    //Group Player
-    this.ships = this.add.group();
 
-    //Player 1
+    ////// ENEMY /////
+    this.enemy = new Enemy({ 
+      scene: this, 
+      x: config.width / 2 - 50, 
+      y: config.height / 2, 
+      key: "Enemy", 
+      anim: "Enemy" 
+    });
+    ////// PLAYER1 //////
     this.player = new Player({
       scene: this,
       x: config.width / 2 - 50,
@@ -54,6 +57,10 @@ class Level1 extends Phaser.Scene {
       this.friend.updateLives(this, 0);
     }
 
+    ////// INTERACTIONS //////
+    //Shoot enemies
+    this.physics.add.overlap(this.shoots, this.enemies, this.hitEnemy, null, this);
+
   }  //Fin del Create
 
   update() {
@@ -71,11 +78,12 @@ class Level1 extends Phaser.Scene {
   Player_Shoot(player) {
     localStorage.setItem('puntuacion', '15');
     console.log(localStorage.getItem('puntuacion'));
-    //Group of Shoots
-    this.shoots = this.add.group();
-
     //Shoot
     this.shoot = new Shoot(this, player);
+  }
+
+  hitEnemy(shoot, enemy){
+    console.log("auch");
   }
 
 }
