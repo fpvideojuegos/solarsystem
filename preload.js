@@ -38,6 +38,12 @@ class Preload extends Phaser.Scene {
             frameHeight: 24
         });
 
+        //Shoot Spritesheet
+        this.load.spritesheet("Shoot", "assets/spritesheets/beam.png",{
+            frameWidth: 16,
+            frameHeight: 16
+        });
+
         ////AUDIO////
         //Main Menu
         this.load.audio("MusMenu", ["assets/sounds/Mus_Menu.ogg", "assets/sounds/Mus_Menu.mp3"]);
@@ -87,6 +93,17 @@ class Preload extends Phaser.Scene {
         this.anims.create({
             key: "Enemy",                                             
             frames: this.anims.generateFrameNumbers("Enemy", { 
+                start: 0,
+                end: 1,
+            }),
+            frameRate: 20,
+            repeat: -1      
+        });
+        
+        //Ship Animation
+        this.anims.create({
+            key: "Shoot",                                             
+            frames: this.anims.generateFrameNumbers("Shoot", { 
                 start: 0,
                 end: 1,
             }),
