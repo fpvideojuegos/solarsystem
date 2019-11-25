@@ -69,4 +69,6 @@ class Level1 extends Phaser.Scene {
     //var shoot = new Shoot(this, player);
     console.log("fire");
   }
+  var puntuacion = localStorage.setItem('puntuacion', '15');
+
 }
