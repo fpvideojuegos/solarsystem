@@ -3,7 +3,7 @@ class Level1 extends Phaser.Scene {
     super("Level1");
   }
 
-  init(mode){
+  init(mode) {
     this.mode = mode;
   }
 
@@ -26,6 +26,15 @@ class Level1 extends Phaser.Scene {
 
     this.music.play(musicConfig);
 
+    //Group of Ships
+    this.enemies = this.add.group();
+
+    //Set the scale of the enemies
+    this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" }).setScale(2);
+
+
+
+
     //Grupo Player
     this.ships = this.add.group();
 
@@ -40,14 +49,26 @@ class Level1 extends Phaser.Scene {
 
     //Controles Player 1
     this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
 
-    
   }  //Fin del Create
-
 
   update() {
     this.Background.tilePositionY -= 0.3;
     this.player.movePlayerManagerCursorKeys();
 
+    //Jugador 1 dispara
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      this.shoot(this.player);
+    }
+
   }  //Fin del Update
+
+  //Crea un disparo en la posición del jugador
+  shoot(player) {
+    //var shoot = new Shoot(this, player);
+    console.log("fire");
+  }
+  var puntuacion = localStorage.setItem('puntuacion', '15');
+
 }
