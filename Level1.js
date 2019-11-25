@@ -69,7 +69,8 @@ class Level1 extends Phaser.Scene {
 
   //Crea un disparo en la posición del jugador
   Player_Shoot(player) {
-
+    localStorage.setItem('puntuacion', '15');
+    console.log(localStorage.getItem('puntuacion'));
     //Group of Shoots
     this.shoots = this.add.group();
 
