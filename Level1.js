@@ -32,10 +32,7 @@ class Level1 extends Phaser.Scene {
     //Set the scale of the enemies
     this.enemy = new Enemy({ scene: this, x: config.width / 2 - 50, y: config.height / 2, key: "Enemy", anim: "Enemy" }).setScale(2);
 
-
-
-
-    //Grupo Player
+    //Group Player
     this.ships = this.add.group();
 
     //Player 1
@@ -59,16 +56,19 @@ class Level1 extends Phaser.Scene {
 
     //Jugador 1 dispara
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-      this.shoot(this.player);
+      this.Player_Shoot(this.player);
     }
 
   }  //Fin del Update
 
   //Crea un disparo en la posición del jugador
-  shoot(player) {
-    //var shoot = new Shoot(this, player);
-    console.log("fire");
+  Player_Shoot(player) {
+
+    //Group of Shoots
+    this.shoots = this.add.group();
+
+    //Shoot
+    this.shoot = new Shoot(this, player);
   }
-  var puntuacion = localStorage.setItem('puntuacion', '15');
 
 }
