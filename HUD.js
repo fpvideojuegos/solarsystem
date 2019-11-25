@@ -7,6 +7,7 @@ class HUD extends Phaser.Scene {
 
     create() {
 
+        
         ///////////  BACKGROUND  ///////////
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x000000, 0.6);
