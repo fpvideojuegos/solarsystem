@@ -46,6 +46,7 @@ class Level1 extends Phaser.Scene {
       key: "player",
       anim: "playerR"
     });
+  
 
     //Controles Player 1
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -69,6 +70,6 @@ class Level1 extends Phaser.Scene {
     //var shoot = new Shoot(this, player);
     console.log("fire");
   }
-  var puntuacion = localStorage.setItem('puntuacion', '15');
+  //var puntuacion = localStorage.setItem('puntuacion', '15');
 
 }
