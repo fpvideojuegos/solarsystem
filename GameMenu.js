@@ -19,7 +19,6 @@ class GameMenu extends Phaser.Scene {
       this.buttonSG.setTint(0xff0000);
 
       this.buttonSG.setInteractive().on('pointerdown', () => { 
-        this.scene.launch("HUD");
         this.scene.start("Level1");
         console.log("ILLYAAA");
     });

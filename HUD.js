@@ -7,7 +7,6 @@ class HUD extends Phaser.Scene {
 
     create() {
 
-        
         ///////////  BACKGROUND  ///////////
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x000000, 0.6);
@@ -22,7 +21,7 @@ class HUD extends Phaser.Scene {
 
         ///////////  TEXTOS  ///////////
         //Puntuaciones
-        this.score1 = this.add.bitmapText(170, 4, "pixelFont", "AAAA", 16);
+        this.score1 = this.add.bitmapText(170, 4, "pixelFont", "", 16);
 
         //Nombres
         this.p1 = this.add.bitmapText(75, 4, "pixelFont", "PLAYER 1", 16);
@@ -31,11 +30,10 @@ class HUD extends Phaser.Scene {
         this.live1 = this.add.bitmapText(5, 4, "pixelFont", "", 16);
 
         ///////////  EVENTOS  ///////////
-        const le = this.scene.get('Level1');
-        le.events.on("scoreChange", this.updateScore, this);
-        le.events.on("livesChange", this.updateLives, this);
-        le.events.on("gameOver", this.gameOver, this);
-        console.log("PSVITa");
+        const Level = this.scene.get('Level1');
+        level.events.on("scoreChange", this.updateScore, this);
+        level.events.on("livesChange", this.updateLives, this);
+        level.events.on("gameOver", this.gameOver, this);
     }
 
     ///////////  FUNCIONES  ///////////
