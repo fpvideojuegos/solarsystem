@@ -49,14 +49,24 @@ class Level1 extends Phaser.Scene {
 
     //Controles Player 1
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
 
   }  //Fin del Create
-
 
   update() {
     this.Background.tilePositionY -= 0.3;
     this.player.movePlayerManagerCursorKeys();
 
+    //Jugador 1 dispara
+    if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+      this.shoot(this.player);
+    }
+
   }  //Fin del Update
+
+  //Crea un disparo en la posición del jugador
+  shoot(player) {
+    //var shoot = new Shoot(this, player);
+    console.log("fire");
+  }
 }
