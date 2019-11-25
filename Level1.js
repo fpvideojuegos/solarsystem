@@ -47,6 +47,12 @@ class Level1 extends Phaser.Scene {
     //Controles Player 1
     this.cursorKeys = this.input.keyboard.createCursorKeys();
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
+    this.player.updateScore(this, 0);
+    this.player.updateLives(this, 0);
+    if(this.registry.get("MultiPlay")){
+      this.friend.updateScore(this, 0);
+      this.friend.updateLives(this, 0);
+    }
 
   }  //Fin del Create
 

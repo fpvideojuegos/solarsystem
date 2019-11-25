@@ -56,7 +56,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-
+  updateScore(scene, pts){
+    this.score = this.score + pts;
+    scene.events.emit("scoreChange", this);
+    console.log("HERRERa KLa CHUPA");
+  }
+  updateLives(scene, hp){
+    this.lives = this.lives + (hp);
+    scene.events.emit("livesChange", this);
+  }
       //Configure cursor key movements
       movePlayerManagerCursorKeys() {
 
