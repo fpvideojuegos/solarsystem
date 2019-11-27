@@ -3,7 +3,7 @@
 
 **Members of the team:**
 
-Nicolás Lerible
+Nicolás Lerible +
 
 Antonio Herrera
 
