@@ -9,6 +9,10 @@ class Preload extends Phaser.Scene {
         //Background Image
         this.load.image("Back", "assets/images/Back.png");
 
+        //pixel font
+        this.load.image('pixel', 'assets/font/pixelfont.png');
+        this.load.json('pixel_json', 'assets/font/pixelfont.json');
+
         //Create Loading Bar
         this.fullBar = this.add.graphics();
         this.fullBar.fillStyle(0x660066, 1);
@@ -73,7 +77,13 @@ class Preload extends Phaser.Scene {
 
     ///////////  CREATE  ///////////
     create() {
+
+        //cargamos la imagen y el json
+        let config = this.cache.json.get('pixel_json');
+        this.cache.bitmapFont.add('pixel', Phaser.GameObjects.RetroFont.Parse(this, config));
         
+
+
         this.scene.start("Menu"); //Primera escena del juego
 
         //Animation player red
