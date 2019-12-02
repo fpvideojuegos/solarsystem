@@ -31,7 +31,7 @@ class HUD extends Phaser.Scene {
         this.live1 = this.add.bitmapText(5, 4, "pixelFont", "", 16);
 
         ///////////  EVENTOS  ///////////
-        const le = this.scene.get('Level1');
+        const le = this.scene.get('Level2');
         le.events.on("scoreChange", this.updateScore, this);
         le.events.on("livesChange", this.updateLives, this);
         le.events.on("gameOver", this.gameOver, this);
