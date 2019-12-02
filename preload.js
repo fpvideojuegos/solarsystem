@@ -9,6 +9,10 @@ class Preload extends Phaser.Scene {
         //Background Image
         this.load.image("Back", "assets/images/Back.png");
 
+        //pixel font
+        this.load.image('pixel', 'assets/font/pixelfont.png');
+        this.load.json('pixel_json', 'assets/font/pixelfont.json');
+
         //Create Loading Bar
         this.fullBar = this.add.graphics();
         this.fullBar.fillStyle(0x660066, 1);
@@ -26,23 +30,31 @@ class Preload extends Phaser.Scene {
             this.fullBar.destroy();
         }, this);
 
-        //Player Spritesheet
+        //// SPRITESHEETS ////
+        //Player
         this.load.spritesheet("player", "assets/spritesheets/player.png",{
             frameWidth: 16,
             frameHeight: 24
         });
 
-        //Enemy Spritesheet
+        //Enemy
         this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png",{
             frameWidth: 24,
             frameHeight: 24
         });
 
-        //Shoot Spritesheet
+        //Shoot
         this.load.spritesheet("Shoot", "assets/spritesheets/beam.png",{
             frameWidth: 16,
             frameHeight: 16
         });
+
+        //Tittle
+        this.load.spritesheet("Tittle", "assets/spritesheets/Titulo.png", {
+            frameWidth: 128,
+            frameHeight: 20
+        });
+
 
         ////AUDIO////
         //Main Menu
@@ -65,7 +77,13 @@ class Preload extends Phaser.Scene {
 
     ///////////  CREATE  ///////////
     create() {
+
+        //cargamos la imagen y el json
+        let config = this.cache.json.get('pixel_json');
+        this.cache.bitmapFont.add('pixel', Phaser.GameObjects.RetroFont.Parse(this, config));
         
+
+
         this.scene.start("Menu"); //Primera escena del juego
 
         //Animation player red
@@ -95,7 +113,7 @@ class Preload extends Phaser.Scene {
             key: "Enemy",                                             
             frames: this.anims.generateFrameNumbers("Enemy", { 
                 start: 0,
-                end: 1,
+                end: 3,
             }),
             frameRate: 20,
             repeat: -1      
@@ -109,6 +127,17 @@ class Preload extends Phaser.Scene {
                 end: 1,
             }),
             frameRate: 20,
+            repeat: -1      
+        });
+
+        //Tittle Animation
+        this.anims.create({
+            key: "Tittle",                                             
+            frames: this.anims.generateFrameNumbers("Tittle", { 
+                start: 0,
+                end: 1,
+            }),
+            frameRate: 10,
             repeat: -1      
         });
     }
