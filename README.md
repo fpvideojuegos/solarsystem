@@ -3,9 +3,9 @@
 
 **Members of the team:**
 
-Nicolás Lerible
+Nicolás Lerible +
 
-Antonio Herrera
+Antonio Herrera ++
 
 Rafael Montes
 
