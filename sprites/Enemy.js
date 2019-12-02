@@ -1,39 +1,49 @@
 class Enemy extends Phaser.GameObjects.Sprite {
   constructor(config) {
-    
+
     super(config.scene, config.x, config.y, config.key, config.anim);
 
+    ///// PARAMS /////
     this.key = config.key;
-    
-    config.scene.physics.world.enable(this);
-    
-    config.scene.add.existing(this);
-    
-    this.play(config.anim);
+    this.value = config.value;
+    this.scene = config.scene;
+    this.speed = config.speed;
 
+    //Physics
+    config.scene.physics.world.enable(this);
+    config.scene.add.existing(this);
     this.setInteractive();
 
+    //Animation
+    this.play(config.anim);
+
+    //Enemy group
     config.scene.enemies.add(this);
   }
 
-  moveEnemy(speed) {
+  moveEnemy() {
 
-    this.y += speed;
-    
+    this.y += this.speed;
+
     if (this.y > config.height) {
-     
-      this.resetShipPos(this);
-    
+      this.scene.time.addEvent({
+        delay: 2000,
+        callback: () => {
+          this.resetEnemy();
+        },
+        callbackScope: this,
+        loop: false
+      });
     }
 
   }
 
-  resetEnemyPos() {
-    
-    this.y = 0;
-    
+  resetEnemy() {
+
+    this.y = -25;
+
     var randomX = Phaser.Math.Between(0, config.width);
-    
+
     this.x = randomX;
   }
 
