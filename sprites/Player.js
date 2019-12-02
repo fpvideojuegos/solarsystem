@@ -18,6 +18,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     //Set lives
     this.lives = 3;
 
+    //Set score
+    this.score = 0;
+
     //Add to group of players
     config.scene.players.add(this);
 
@@ -59,8 +62,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
   updateScore(scene, pts){
     this.score = this.score + pts;
     scene.events.emit("scoreChange", this);
-    console.log("HERRERa KLa CHUPA");
   }
+
   updateLives(scene, hp){
     this.lives = this.lives + (hp);
     scene.events.emit("livesChange", this);
