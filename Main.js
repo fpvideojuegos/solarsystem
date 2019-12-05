@@ -8,7 +8,8 @@ class Main extends Phaser.Scene {
 
         this.planet.setInteractive().on('pointerdown', () => {
             this.scene.launch("HUD");
-            this.scene.start("Level1");
+            //this.scene.start("Level1");
+            this.scene.start("Level2");
         });
 
 
