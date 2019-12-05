@@ -26,23 +26,31 @@ class Preload extends Phaser.Scene {
             this.fullBar.destroy();
         }, this);
 
-        //Player Spritesheet
+        //// SPRITESHEETS ////
+        //Player
         this.load.spritesheet("player", "assets/spritesheets/player.png",{
             frameWidth: 16,
             frameHeight: 24
         });
 
-        //Enemy Spritesheet
+        //Enemy
         this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png",{
             frameWidth: 24,
             frameHeight: 24
         });
 
-        //Shoot Spritesheet
+        //Shoot
         this.load.spritesheet("Shoot", "assets/spritesheets/beam.png",{
             frameWidth: 16,
             frameHeight: 16
         });
+
+        //Tittle
+        this.load.spritesheet("Tittle", "assets/spritesheets/Titulo.png", {
+            frameWidth: 128,
+            frameHeight: 20
+        });
+
 
         ////AUDIO////
         //Main Menu
@@ -95,7 +103,7 @@ class Preload extends Phaser.Scene {
             key: "Enemy",                                             
             frames: this.anims.generateFrameNumbers("Enemy", { 
                 start: 0,
-                end: 1,
+                end: 3,
             }),
             frameRate: 20,
             repeat: -1      
@@ -109,6 +117,17 @@ class Preload extends Phaser.Scene {
                 end: 1,
             }),
             frameRate: 20,
+            repeat: -1      
+        });
+
+        //Tittle Animation
+        this.anims.create({
+            key: "Tittle",                                             
+            frames: this.anims.generateFrameNumbers("Tittle", { 
+                start: 0,
+                end: 1,
+            }),
+            frameRate: 10,
             repeat: -1      
         });
     }
