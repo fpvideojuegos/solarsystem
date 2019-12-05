@@ -4,6 +4,8 @@ class Main extends Phaser.Scene {
     }
 
     create() {
+        var mercury;
+      mercury=this.add.sprite(120, 300,'mercury').setScale(5);
         this.planet = this.add.text(70, 330, "MERCURY");
 
         this.planet.setInteractive().on('pointerdown', () => {

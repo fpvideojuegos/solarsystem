@@ -6,8 +6,10 @@ class Preload extends Phaser.Scene {
     ///////////  PRECARGA  ///////////
     preload() {
 
-        //Background Image
+        //Images
         this.load.image("Back", "assets/images/Back.png");
+        this.load.image('mercury','assets/images/mercury.png');
+
 
         //Create Loading Bar
         this.fullBar = this.add.graphics();
