@@ -19,7 +19,7 @@ class Boss extends Phaser.GameObjects.Sprite {
 
     }
   
-    moveEnemy() {
+    moveBoss() {
   
       this.y += this.speed;
   
@@ -36,7 +36,7 @@ class Boss extends Phaser.GameObjects.Sprite {
   
     }
   
-    resetEnemy() {
+    resetBoss() {
   
       this.y = -25;
   

@@ -46,7 +46,11 @@ class Level2 extends Phaser.Scene {
 
         //Controles Player 1
         //this.cursorKeys = this.input.keyboard.createCursorKeys();
-        //this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
+        
+        //Normal Shoot P1
+        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
+        
+        
         this.player.updateScore(this, 0);
         this.player.updateLives(this, 0);
         if (this.registry.get("MultiPlay")) {
@@ -79,8 +83,12 @@ class Level2 extends Phaser.Scene {
         }, this);
 
 
-        //Jugador 1 dispara
-        //Phaser.Input.Keyboard.JustDown(this.spacebar)
+        //Normal Shoot P1
+        //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+        //    this.Player_Shoot(this.player);
+        //}
+
+        //PowerUp Shoot P1
         if (this.player.spacebar.isDown) {
             this.Player_Shoot(this.player);
         }
@@ -113,6 +121,10 @@ class Level2 extends Phaser.Scene {
         enemy.destroy();
         console.log(localStorage.getItem("pts"));
         this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
+    }
+
+    finalBoss(){
+
     }
 
 
