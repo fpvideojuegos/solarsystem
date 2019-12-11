@@ -67,6 +67,9 @@ class Preload extends Phaser.Scene {
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
         
         this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
+        this.load.bitmapFont("pixel2","assets/font/pixelfont.png","assets/font/pixelfont.json");
+        this.load.bitmapFont("pixel3","assets/font/pixelfont.png","assets/font/pixelfont.xml");
+
 
         /* Fuente pixelada "Fuente"
         this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
