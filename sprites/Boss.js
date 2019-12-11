@@ -19,7 +19,7 @@ class Boss extends Phaser.GameObjects.Sprite {
 
     }
   
-    moveEnemy() {
+    moveBoss() {
   
       this.y += this.speed;
   
@@ -27,7 +27,7 @@ class Boss extends Phaser.GameObjects.Sprite {
         this.scene.time.addEvent({
           delay: 2000,
           callback: () => {
-            this.resetEnemy();
+            this.resetBoss();
           },
           callbackScope: this,
           loop: false
@@ -36,7 +36,7 @@ class Boss extends Phaser.GameObjects.Sprite {
   
     }
   
-    resetEnemy() {
+    resetBoss() {
   
       this.y = -25;
   
