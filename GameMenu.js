@@ -7,7 +7,8 @@ class GameMenu extends Phaser.Scene {
 
     this.tittle = this.add.image(config.width / 2, config.height / 5, 'Tittle').setScale(2.5);
 
-    this.texto = this.add.bitmapText(20, 20, 'pixel', 'VALOR 0');
+    // 
+    this.add.text(10, 10, 'soy texto uno', {fontFamily: 'jaja', fontSize: 40});
 
     this.button1 = this.add.text(70, 330, "1 PLAYER");
     this.button1.setFontFamily('Fuente');

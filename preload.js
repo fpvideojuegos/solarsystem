@@ -9,9 +9,9 @@ class Preload extends Phaser.Scene {
         //Background Image
         this.load.image("Back", "assets/images/Back.png");
 
-        //pixel font
-        this.load.image('pixel', 'assets/font/pixelfont.png');
-        this.load.json('pixel_json', 'assets/font/pixelfont.json');
+         //pixel font
+         this.load.image('pixel', 'assets/font/pixelfont.png');
+         this.load.json('pixel_json', 'assets/font/pixelfont.json');
 
         //Create Loading Bar
         this.fullBar = this.add.graphics();
@@ -55,6 +55,20 @@ class Preload extends Phaser.Scene {
             frameHeight: 20
         });
 
+        //Mercurio
+        this.load.spritesheet("Mercurio", "sprites/mercury.png", {
+            frameWidth: 60,
+            frameHeight: 60
+        });
+
+        //Saturno
+        this.load.spritesheet("Saturno", "sprites/saturn.png", {
+            frameWidth: 120,
+            frameHeight: 200
+        });
+
+        //
+
 
         ////AUDIO////
         //Main Menu
@@ -67,13 +81,8 @@ class Preload extends Phaser.Scene {
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
         
         this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
-        this.load.bitmapFont("pixel2","assets/font/pixelfont.png","assets/font/pixelfont.json");
-        this.load.bitmapFont("pixel3","assets/font/pixelfont.png","assets/font/pixelfont.xml");
+        
 
-
-        /* Fuente pixelada "Fuente"
-        this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
-        */
 
     } //FINAL PRELOAD
 
@@ -85,7 +94,6 @@ class Preload extends Phaser.Scene {
         let config = this.cache.json.get('pixel_json');
         this.cache.bitmapFont.add('pixel', Phaser.GameObjects.RetroFont.Parse(this, config));
         
-
 
         this.scene.start("Menu"); //Primera escena del juego
 
