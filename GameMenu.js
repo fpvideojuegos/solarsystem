@@ -7,7 +7,13 @@ class GameMenu extends Phaser.Scene {
 
     this.tittle = this.add.image(config.width / 2, config.height / 5, 'Tittle').setScale(2.5);
 
+    this.startButton = this.add.bitmapText(config.width / 2, config.height / 3, "pixelFont", "START GAME", 48).setOrigin(0.5, 0.5);
 
+    this.startButton.setInteractive().on('pointerdown', () => {
+      this.scene.start("Main");
+    });
+
+    /*
     this.button1 = this.add.text(70, 330, "1 PLAYER");
     this.button1.setFontFamily('Fuente');
     this.button1.setFontSize(22);
@@ -35,5 +41,6 @@ class GameMenu extends Phaser.Scene {
       this.button2.setTint(0xfebe34);
       this.registry.set("friend"); // se pueden guardar objetos en el 2
     });
+    */
   }
 }

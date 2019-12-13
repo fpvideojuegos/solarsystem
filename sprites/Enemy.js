@@ -14,37 +14,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
     config.scene.add.existing(this);
     this.setInteractive();
 
-    //Animation
-    this.play(config.anim);
-
     //Enemy group
     config.scene.enemies.add(this);
-  }
-
-  moveEnemy() {
-
-    this.y += this.speed;
-
-    if (this.y > config.height) {
-      this.scene.time.addEvent({
-        delay: 2000,
-        callback: () => {
-          this.resetEnemy();
-        },
-        callbackScope: this,
-        loop: false
-      });
-    }
-
-  }
-
-  resetEnemy() {
-
-    this.y = -25;
-
-    var randomX = Phaser.Math.Between(0, config.width);
-
-    this.x = randomX;
   }
 
 }

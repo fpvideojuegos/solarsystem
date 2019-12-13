@@ -13,7 +13,8 @@ class Boss extends Phaser.GameObjects.Sprite {
       config.scene.physics.world.enable(this);
       config.scene.add.existing(this);
       this.setInteractive();
-  
+      
+      console.log(config.anim);
       //Animation
       this.play(config.anim);
 
@@ -25,9 +26,9 @@ class Boss extends Phaser.GameObjects.Sprite {
   
       if (this.y > config.height) {
         this.scene.time.addEvent({
-          delay: 2000,
+          delay: 1000,
           callback: () => {
-            this.resetEnemy();
+            this.resetBoss();
           },
           callbackScope: this,
           loop: false
@@ -38,7 +39,7 @@ class Boss extends Phaser.GameObjects.Sprite {
   
     resetBoss() {
   
-      this.y = -25;
+      this.y = -50;
   
       var randomX = Phaser.Math.Between(0, config.width);
   

@@ -6,9 +6,9 @@ class Level2 extends Phaser.Scene {
     create() {
 
         ///// ASSETS //////
-        this.Background = this.add.tileSprite(0, 0, config.width, config.height, "Back").setOrigin(0, 0);
+        this.Background = this.add.tileSprite(0, 0, config.width, config.height, "bgSaturn").setOrigin(0, 0).setScale(4);
         //Music
-        this.music = this.sound.add("MusMenu");
+        this.music = this.sound.add("MusLevel2");
         var musicConfig = {
             mute: false,
             volume: 1,
@@ -24,7 +24,7 @@ class Level2 extends Phaser.Scene {
         localStorage.setItem('pts', 0);
 
         ///// GROUPS //////
-        //Group of Ship1
+        //Group of Enemies
         this.enemies = this.add.group();
         //Group of Players
         this.players = this.add.group();
@@ -44,13 +44,9 @@ class Level2 extends Phaser.Scene {
             anim: "playerR"
         });
 
-        //Controles Player 1
-        //this.cursorKeys = this.input.keyboard.createCursorKeys();
-        
-        //Normal Shoot P1
-        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
-        
-        
+        //Normal shoot
+        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
         this.player.updateScore(this, 0);
         this.player.updateLives(this, 0);
         if (this.registry.get("MultiPlay")) {
@@ -61,35 +57,34 @@ class Level2 extends Phaser.Scene {
         ////// INTERACTIONS //////
         //Shoot enemies
         this.physics.add.overlap(this.shoots, this.enemies, this.hitEnemy, null, this);
+        //Shoot Boss
+        this.physics.add.overlap(this.shoots, this.boss, this.hitBoss, null, this);
 
     }  //Fin del Create
 
     update() {
+
         this.Background.tilePositionY -= 0.3;
         this.player.movePlayerManagerCursorKeys();
 
-        //Enemies movement
-        this.enemies.getChildren().forEach(function (enemy) {
-            enemy.moveEnemy();
-        }, this);
+        if (!this.boss) {
+            this.finalBoss();
 
-        if (this.enemies.getLength() == 0) {
-            this.enemyFactory(this.NumEne);
-            this.NumEne += 2;
-        };
+            //Enemies movement
+            this.enemies.getChildren().forEach(function (enemy) {
+                enemy.moveEnemy();
+            }, this);
 
-        this.shoots.getChildren().forEach(function (shoot) {
-            shoot.deleteShoot();
-        }, this);
+            this.shoots.getChildren().forEach(function (shoot) {
+                shoot.deleteShoot();
+            }, this);
 
+        } else {
+            this.boss.moveBoss();
+        }
 
-        //Normal Shoot P1
-        //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-        //    this.Player_Shoot(this.player);
-        //}
-
-        //PowerUp Shoot P1
-        if (this.player.spacebar.isDown) {
+        //Normal shoot
+        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
             this.Player_Shoot(this.player);
         }
 
@@ -103,7 +98,7 @@ class Level2 extends Phaser.Scene {
 
     enemyFactory(num) {
         for (var i = 0; i < num; i++) {
-            this.enemy = new Enemy({
+            this.enemy = new Zero({
                 scene: this,
                 x: config.width / 2 - 50,
                 y: config.height,
@@ -123,10 +118,34 @@ class Level2 extends Phaser.Scene {
         this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
     }
 
-    finalBoss(){
-
+    hitBoss(shoot, boss) {
+        localStorage.setItem('pts', parseInt(localStorage.getItem("pts")) + boss.value);
+        shoot.destroy();
+        boss.destroy();
+        console.log(localStorage.getItem("pts"));
+        this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
     }
 
+    finalBoss() {
+        console.log("Puntos de player: " + parseInt(localStorage.getItem("pts")));
 
+        if (parseInt(localStorage.getItem("pts")) > 500) {
+
+            console.log("Boss entry");
+
+            this.enemies.clear(true); // Remove all Children.
+
+            this.boss = new Boss({
+                scene: this,
+                x: config.width / 2 - 50,
+                y: config.height - 350,
+                key: "Boss",
+                anim: "Boss",
+                value: 1000,
+                speed: (Math.random() * 2) + 1
+            });
+
+        }
+    }
 
 }

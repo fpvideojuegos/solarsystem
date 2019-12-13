@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <chars>0123456789   ABCDEFGHIJKLMNOPQRSTUVWXYZ</chars>
+   <charsPerRow>13</charsPerRow>
+   <height>16</height>
+   <image>pixelfont</image>
+   <offset>
+      <x>0</x>
+      <y>0</y>
+   </offset>
+   <spacing>
+      <x>0</x>
+      <y>0</y>
+   </spacing>
+   <width>16</width>
+</root>
