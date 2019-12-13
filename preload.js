@@ -13,7 +13,8 @@ class Preload extends Phaser.Scene {
         this.load.image("bgSaturn", "assets/images/bgSaturn.png");
 
         ////// FONTS //////
-        this.load.bitmapFont("pixelFont", "assets/font/fonPixel.png", "assets/font/fonPixel.fnt");
+        //this.load.bitmapFont("pixelFont", "assets/font/fonPixel.png", "assets/font/fonPixel.fnt"); //Desactivada por falta numeros
+        this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml"); //Por defecto
 
 
         /////// LOADING BAR //////
@@ -53,9 +54,9 @@ class Preload extends Phaser.Scene {
         });
 
         //Bounty hunter
-        this.load.spritesheet("hunter", "assets/spritesheets/bounty-hunter.png", {
-            frameWidth: 140,
-            frameHeight: 127
+        this.load.spritesheet("hunter", "assets/spritesheets/boss.png", {
+            frameWidth: 68,
+            frameHeight: 68
         });
 
         //Shoot
@@ -95,10 +96,6 @@ class Preload extends Phaser.Scene {
         this.load.audio("SndPowerup", ["assets/sounds/Snd_Powerup.ogg", "assets/sounds/Snd_Powerup.mp3"]);
         //shoot Audio
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
-
-        this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
-
-
 
     } //FINAL PRELOAD
 
