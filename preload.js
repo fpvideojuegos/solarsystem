@@ -6,19 +6,26 @@ class Preload extends Phaser.Scene {
     ///////////  PRECARGA  ///////////
     preload() {
 
-        //Background Image
-        this.load.image("Back", "assets/images/Back.png");
+        ////// BACKGROUNDS //////
+        //Mercury
+        this.load.image("bgMercury", "assets/images/bgMercury.png");
+        //Saturn
+        this.load.image("bgSaturn", "assets/images/bgSaturn.png");
 
-        //Create Loading Bar
+        ////// FONTS //////
+        this.load.bitmapFont("pixelFont", "assets/font/fonPixel.png", "assets/font/fonPixel.fnt");
+
+
+        /////// LOADING BAR //////
         this.fullBar = this.add.graphics();
         this.fullBar.fillStyle(0x660066, 1);
-        this.fullBar.fillRect((this.cameras.main.width / 4)-2,(this.cameras.main.height /2) - 18, (this.cameras.main.width / 2) + 4, 20);
+        this.fullBar.fillRect((this.cameras.main.width / 4) - 2, (this.cameras.main.height / 2) - 18, (this.cameras.main.width / 2) + 4, 20);
         this.progress = this.add.graphics();
         //Progress
         this.load.on('progress', function (value) {
             this.progress.clear();
             this.progress.fillStyle(0x990099, 1);
-            this.progress.fillRect((this.cameras.main.width / 4), (this.cameras.main.height /2) - 16, (this.cameras.main.width / 2) * value, 16);
+            this.progress.fillRect((this.cameras.main.width / 4), (this.cameras.main.height / 2) - 16, (this.cameras.main.width / 2) * value, 16);
         }, this);
         //Delete Loading Bar
         this.load.on('complete', function () {
@@ -28,19 +35,31 @@ class Preload extends Phaser.Scene {
 
         //// SPRITESHEETS ////
         //Player
-        this.load.spritesheet("player", "assets/spritesheets/player.png",{
-            frameWidth: 16,
-            frameHeight: 24
-        });
-
-        //Enemy
-        this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png",{
+        this.load.spritesheet("player", "assets/spritesheets/nave.png", {
             frameWidth: 24,
             frameHeight: 24
         });
 
+        //Basic
+        this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png", {
+            frameWidth: 24,
+            frameHeight: 24
+        });
+
+        //Jet-Z
+        this.load.spritesheet("JetZ", "assets/spritesheets/lemon.png", {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+
+        //Bounty hunter
+        this.load.spritesheet("hunter", "assets/spritesheets/bounty-hunter.png", {
+            frameWidth: 140,
+            frameHeight: 127
+        });
+
         //Shoot
-        this.load.spritesheet("Shoot", "assets/spritesheets/beam.png",{
+        this.load.spritesheet("Shoot", "assets/spritesheets/beam.png", {
             frameWidth: 16,
             frameHeight: 16
         });
@@ -51,37 +70,50 @@ class Preload extends Phaser.Scene {
             frameHeight: 20
         });
 
+        //Mercury
+        this.load.spritesheet("Mercurio", "assets/images/mercury.png", {
+            frameWidth: 60,
+            frameHeight: 60
+        });
+
+        //Saturn
+        this.load.spritesheet("Saturno", "assets/images/saturn.png", {
+            frameWidth: 120,
+            frameHeight: 200
+        });
 
         ////AUDIO////
         //Main Menu
         this.load.audio("MusMenu", ["assets/sounds/Mus_Menu.ogg", "assets/sounds/Mus_Menu.mp3"]);
+        //Main Menu
+        this.load.audio("MusLevel1", ["assets/sounds/Mus_Nivel1.ogg", "assets/sounds/Mus_Nivel1.mp3"]);
+        //Main Menu
+        this.load.audio("MusLevel2", ["assets/sounds/Mus_Nivel2.ogg", "assets/sounds/Mus_Nivel2.mp3"]);
         //Explosion Audio
         this.load.audio("SndExplosion", ["assets/sounds/Snd_Explosion.ogg", "assets/sounds/Snd_Explosion.mp3"]);
         //PowerUp Audio
         this.load.audio("SndPowerup", ["assets/sounds/Snd_Powerup.ogg", "assets/sounds/Snd_Powerup.mp3"]);
         //shoot Audio
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
-        
+
         this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
 
-        /* Fuente pixelada "Fuente"
-        this.load.bitmapFont("Fuente", "assets/font/font.png", "assets/font/font.xml");
-        */
+
 
     } //FINAL PRELOAD
 
 
     ///////////  CREATE  ///////////
     create() {
-        
+
         this.scene.start("Menu"); //Primera escena del juego
 
         //Animation player red
         this.anims.create({
             key: "playerR",
-            frames: this.anims.generateFrameNumbers("player", { 
+            frames: this.anims.generateFrameNumbers("player", {
                 start: 0,
-                end: 1,
+                end: 2,
             }),
             frameRate: 20,
             repeat: -1
@@ -100,35 +132,57 @@ class Preload extends Phaser.Scene {
 
         //Ship Animation
         this.anims.create({
-            key: "Enemy",                                             
-            frames: this.anims.generateFrameNumbers("Enemy", { 
+            key: "Enemy",
+            frames: this.anims.generateFrameNumbers("Enemy", {
                 start: 0,
                 end: 3,
             }),
             frameRate: 20,
-            repeat: -1      
+            repeat: -1
         });
-        
-        //Ship Animation
+
+        //jet-Z Animation
         this.anims.create({
-            key: "Shoot",                                             
-            frames: this.anims.generateFrameNumbers("Shoot", { 
+            key: "AnimJetZ",
+            frames: this.anims.generateFrameNumbers("JetZ", {
+                start: 0,
+                end: 0,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        //Boss Animation
+        this.anims.create({
+            key: "Boss",
+            frames: this.anims.generateFrameNumbers("hunter", {
+                start: 0,
+                end: 0,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+
+        //Shoot Animation
+        this.anims.create({
+            key: "Shoot",
+            frames: this.anims.generateFrameNumbers("Shoot", {
                 start: 0,
                 end: 1,
             }),
             frameRate: 20,
-            repeat: -1      
+            repeat: -1
         });
 
         //Tittle Animation
         this.anims.create({
-            key: "Tittle",                                             
-            frames: this.anims.generateFrameNumbers("Tittle", { 
+            key: "Tittle",
+            frames: this.anims.generateFrameNumbers("Tittle", {
                 start: 0,
                 end: 1,
             }),
             frameRate: 10,
-            repeat: -1      
+            repeat: -1
         });
     }
 }

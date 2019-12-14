@@ -9,7 +9,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     config.scene.physics.world.enable(this);
     config.scene.add.existing(this);
 
-    //Start with "Player" animation
+    //Start with "PlayerR" animation
     this.play("playerR");
 
     //Add collides

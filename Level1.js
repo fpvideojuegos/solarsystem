@@ -6,16 +6,17 @@ class Level1 extends Phaser.Scene {
   create() {
 
     ///// ASSETS //////
-    this.Background = this.add.tileSprite(0, 0, config.width, config.height, "Back").setOrigin(0, 0);
+    //Background
+    this.Background = this.add.tileSprite(0, 0, config.width, config.height, "bgMercury").setOrigin(0, 0);
     //Music
-    this.music = this.sound.add("MusMenu");
+    this.music = this.sound.add("MusLevel1");
     var musicConfig = {
       mute: false,
       volume: 1,
       rate: 1,
       detune: 0,
       seek: 0,
-      loop: false,
+      loop: true,
       delay: 0
     }
     this.music.play(musicConfig);
@@ -31,11 +32,8 @@ class Level1 extends Phaser.Scene {
     //Group of Shoots
     this.shoots = this.add.group();
 
-    this.NumEne = 20;
-    this.enemyFactory(this.NumEne);
-    
-
-    ////// PLAYER1 //////
+    ////// PLAYER //////
+    //Creation
     this.player = new Player({
       scene: this,
       x: config.width / 2 - 50,
@@ -43,24 +41,26 @@ class Level1 extends Phaser.Scene {
       key: "player",
       anim: "playerR"
     });
-
-    //Controles Player 1
+    //Management
     this.cursorKeys = this.input.keyboard.createCursorKeys();
-    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); //Disparar
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    //Score
     this.player.updateScore(this, 0);
+    //Lives
     this.player.updateLives(this, 0);
-    if (this.registry.get("MultiPlay")) {
-      this.friend.updateScore(this, 0);
-      this.friend.updateLives(this, 0);
-    }
 
     ////// INTERACTIONS //////
     //Shoot enemies
     this.physics.add.overlap(this.shoots, this.enemies, this.hitEnemy, null, this);
+    //Collision
+    this.physics.add.overlap(this.players, this.enemies, this.hitted, null, this);
+
+    this.phase1(11);
 
   }  //Fin del Create
 
   update() {
+    //Background movement
     this.Background.tilePositionY -= 0.3;
     this.player.movePlayerManagerCursorKeys();
 
@@ -69,10 +69,11 @@ class Level1 extends Phaser.Scene {
       enemy.moveEnemy();
     }, this);
 
-    if(this.enemies.getLength() == 0){
-      this.enemyFactory(this.NumEne);
-      this.NumEne += 2; 
-    };
+    if(localStorage.getItem("pts") > 500 && this.enemies.getLength() == 0){
+      console.log("hi")
+      this.phase2(10);
+    }
+
 
     this.shoots.getChildren().forEach(function(shoot) {
       shoot.deleteShoot();
@@ -92,9 +93,9 @@ class Level1 extends Phaser.Scene {
     this.shoot = new Shoot(this, player);
   }
 
-  enemyFactory(num){
+  phase1(num){
     for (var i = 0; i < num; i++) {
-      this.enemy = new Enemy({
+      this.enemy = new Zero({
         scene: this,
         x: config.width / 2 - 50,
         y: config.height,
@@ -102,6 +103,32 @@ class Level1 extends Phaser.Scene {
         anim: "Enemy",
         value: 50,
         speed: (Math.random()*2)+1
+      });
+    }
+  }
+  
+  phase2(num){
+
+    for (var i = 0; i < num; i++) {
+      this.enemy = new JetZ({
+        scene: this,
+        x: config.width / 2 - 50,
+        y: config.height,
+        key: "Enemy",
+        anim: "Enemy",
+        value: 50,
+        speed: (Math.random()*2)+1,
+        position: 1
+      });
+      this.enemy = new JetZ({
+        scene: this,
+        x: config.width / 2 - 50,
+        y: config.height,
+        key: "Enemy",
+        anim: "Enemy",
+        value: 50,
+        speed: (Math.random()*2)+1,
+        position: 0
       });
     }
   }
