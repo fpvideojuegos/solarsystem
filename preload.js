@@ -140,10 +140,20 @@ class Preload extends Phaser.Scene {
 
         //jet-Z Animation
         this.anims.create({
-            key: "AnimJetZ",
+            key: "AnimJetZLeft",
             frames: this.anims.generateFrameNumbers("JetZ", {
                 start: 0,
-                end: 0,
+                end: 1,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+        //jet-Z Animation
+        this.anims.create({
+            key: "AnimJetZRight",
+            frames: this.anims.generateFrameNumbers("JetZ", {
+                start: 2,
+                end: 3,
             }),
             frameRate: 20,
             repeat: -1
