@@ -19,7 +19,7 @@ class Boss extends Enemy {
 
     }
   
-    moveEnemy() {
+    moveBoss() {
   
       this.y += this.speed;
   
@@ -27,7 +27,7 @@ class Boss extends Enemy {
         this.scene.time.addEvent({
           delay: 1000,
           callback: () => {
-            this.resetEnemy();
+            this.resetBoss();
           },
           callbackScope: this,
           loop: false
@@ -36,7 +36,7 @@ class Boss extends Enemy {
   
     }
   
-    resetEnemy() {
+    resetBoss() {
   
       this.y = -50;
   

@@ -10,7 +10,8 @@ class HUD extends Phaser.Scene {
         
         ///////////  BACKGROUND  ///////////
         this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0xdddddd);
+        this.graphics.fillStyle(0x000000, 0.6); //!!
+        // This apply after upload the project -> this.graphics.fillStyle(0xdddddd);
         this.graphics.beginPath();
         this.graphics.moveTo(0, 0);
         this.graphics.lineTo(config.width, 0);

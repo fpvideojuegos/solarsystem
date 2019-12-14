@@ -6,8 +6,11 @@ class Level2 extends Phaser.Scene {
     create() {
 
         ///// ASSETS //////
+
+        //Background
         this.Background = this.add.tileSprite(0, 0, config.width, config.height, "bgSaturn").setOrigin(0, 0).setScale(4);
-        //Music
+
+        //Music of this scene
         this.music = this.sound.add("MusLevel2");
         var musicConfig = {
             mute: false,
@@ -49,10 +52,6 @@ class Level2 extends Phaser.Scene {
 
         this.player.updateScore(this, 0);
         this.player.updateLives(this, 0);
-        if (this.registry.get("MultiPlay")) {
-            this.friend.updateScore(this, 0);
-            this.friend.updateLives(this, 0);
-        }
 
         ////// INTERACTIONS //////
         //Shoot enemies
@@ -63,6 +62,8 @@ class Level2 extends Phaser.Scene {
     }  //Fin del Create
 
     update() {
+
+        //console.log(this.player.score);
 
         this.Background.tilePositionY -= 0.3;
         this.player.movePlayerManagerCursorKeys();
@@ -94,6 +95,19 @@ class Level2 extends Phaser.Scene {
     Player_Shoot(player) {
         //Shoot
         this.shoot = new Shoot(this, player);
+
+        //Shoot sound
+        this.music = this.sound.add("SndShoot");
+        var SndShoot = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        this.music.play(SndShoot);
     }
 
     enemyFactory(num) {
@@ -116,6 +130,19 @@ class Level2 extends Phaser.Scene {
         enemy.destroy();
         console.log(localStorage.getItem("pts"));
         this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
+
+        //Destroy Enemy sound
+        this.music = this.sound.add("SndExplosion");
+        var SndExplosion = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+        this.music.play(SndExplosion);
     }
 
     hitBoss(shoot, boss) {
