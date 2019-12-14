@@ -10,8 +10,16 @@ class Level1 extends Phaser.Scene {
         //Background
         this.Background = this.add.tileSprite(0, 0, config.width, config.height, "bgMercury").setOrigin(0, 0);
 
-        //Music of this scene
+        ///////////  AUDIO  ///////////
+        //Sounds
+        this.SndShoot = this.sound.add("SndShoot");
+        this.SndExplosion = this.sound.add("SndExplosion");
+        this.pickupSound = this.sound.add("SndPowerup");
+
+        //Music
         this.music = this.sound.add("MusLevel1");
+
+        //Music Configuration
         var musicConfig = {
             mute: false,
             volume: 1,
@@ -21,6 +29,18 @@ class Level1 extends Phaser.Scene {
             loop: true,
             delay: 0
         }
+        //Sound Configuration
+        this.soundConfig = {
+            mute: false,
+            volume: 0.3,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+
+        //Plays Level1 theme
         this.music.play(musicConfig);
 
         ///// PARAMS /////
@@ -54,7 +74,8 @@ class Level1 extends Phaser.Scene {
         ////// INTERACTIONS //////
         //Shoot enemies
         this.physics.add.overlap(this.shoots, this.enemies, this.hitEnemy, null, this);
-
+        //hit player
+        this.physics.add.overlap(this.players, this.enemies, this.hitted, null, this);
 
         this.phase1(11);
 
@@ -91,19 +112,8 @@ class Level1 extends Phaser.Scene {
     Player_Shoot(player) {
         //Shoot
         this.shoot = new Shoot(this, player);
-
         //Shoot sound
-        this.music = this.sound.add("SndShoot");
-        var SndShoot = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false,
-            delay: 0
-        }
-        this.music.play(SndShoot);
+        this.SndShoot.play(this.soundConfig);
     }
 
     phase1(num) {
@@ -113,7 +123,6 @@ class Level1 extends Phaser.Scene {
                 x: config.width / 2 - 50,
                 y: config.height,
                 key: "Enemy",
-                anim: "Enemy",
                 value: 50,
                 speed: (Math.random() * 2) + 1
             });
@@ -128,7 +137,6 @@ class Level1 extends Phaser.Scene {
                 x: config.width / 2 - 50,
                 y: config.height,
                 key: "Enemy",
-                anim: "Enemy",
                 value: 50,
                 speed: (Math.random() * 2) + 1,
                 position: 1
@@ -138,12 +146,17 @@ class Level1 extends Phaser.Scene {
                 x: config.width / 2 - 50,
                 y: config.height,
                 key: "Enemy",
-                anim: "Enemy",
                 value: 50,
                 speed: (Math.random() * 2) + 1,
                 position: 0
             });
         }
+    }
+
+    hitted(player, enemy) {
+        this.SndExplosion.play(this.soundConfig);
+
+        player.hitted(this, enemy);
     }
 
     hitEnemy(shoot, enemy) {
@@ -153,17 +166,7 @@ class Level1 extends Phaser.Scene {
         console.log(localStorage.getItem("pts"));
 
         //Destroy Enemy sound
-        this.music = this.sound.add("SndExplosion");
-        var SndExplosion = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false,
-            delay: 0
-        }
-        this.music.play(SndExplosion);
+        this.SndExplosion.play(this.soundConfig);
     }
 
 }

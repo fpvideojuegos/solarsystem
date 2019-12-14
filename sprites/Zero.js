@@ -3,7 +3,7 @@ class Zero extends Enemy {
         super(config);
 
         //Animation
-        this.play(config.anim);
+        this.play("Enemy");
     }
 
     moveEnemy() {

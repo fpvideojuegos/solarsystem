@@ -3,7 +3,6 @@ class JetZ extends Enemy {
         super(config);
 
         this.position = config.posi;
-        console.log(this.position)
 
         //Animation
         this.play("AnimJetZLeft");
