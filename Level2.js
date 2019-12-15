@@ -10,8 +10,13 @@ class Level2 extends Phaser.Scene {
         //Background
         this.Background = this.add.tileSprite(0, 0, config.width, config.height, "bgSaturn").setOrigin(0, 0).setScale(4);
 
-        //Music of this scene
+        ///////////  AUDIO  ///////////
+        //Sounds
         this.music = this.sound.add("MusLevel2");
+        this.SndShoot = this.sound.add("SndShoot");
+        this.SndExplosion = this.sound.add("SndExplosion");
+
+        //Music Configuration
         var musicConfig = {
             mute: false,
             volume: 1,
@@ -21,6 +26,19 @@ class Level2 extends Phaser.Scene {
             loop: false,
             delay: 0
         }
+
+        //One loop configuration sound
+        var sound = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }
+
+        //Music
         this.music.play(musicConfig);
 
         ///// PARAMS /////
@@ -58,15 +76,22 @@ class Level2 extends Phaser.Scene {
         this.physics.add.overlap(this.shoots, this.enemies, this.hitEnemy, null, this);
         //Shoot Boss
         this.physics.add.overlap(this.shoots, this.boss, this.hitBoss, null, this);
+        //Player hit
+        this.physics.add.overlap(this.players, this.enemies, this.hitPlayer, null, this);
 
     }  //Fin del Create
 
     update() {
 
-        //console.log(this.player.score);
+        //console.log("Puntos del player" + this.player.score);
+        //console.log("Vidas del player" + this.player.lives);
 
         this.Background.tilePositionY -= 0.3;
         this.player.movePlayerManagerCursorKeys();
+
+        this.win(); //Check if player wins
+
+        this.lose(); //Check if player lose
 
         if (!this.boss) {
             this.finalBoss();
@@ -81,7 +106,9 @@ class Level2 extends Phaser.Scene {
             }, this);
 
         } else {
+
             this.boss.moveBoss();
+
         }
 
         //Normal shoot
@@ -97,17 +124,7 @@ class Level2 extends Phaser.Scene {
         this.shoot = new Shoot(this, player);
 
         //Shoot sound
-        this.music = this.sound.add("SndShoot");
-        var SndShoot = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false,
-            delay: 0
-        }
-        this.music.play(SndShoot);
+        this.SndShoot.play(this.sound);
     }
 
     enemyFactory(num) {
@@ -132,17 +149,7 @@ class Level2 extends Phaser.Scene {
         this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
 
         //Destroy Enemy sound
-        this.music = this.sound.add("SndExplosion");
-        var SndExplosion = {
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false,
-            delay: 0
-        }
-        this.music.play(SndExplosion);
+        this.SndExplosion.play(this.sound);
     }
 
     hitBoss(shoot, boss) {
@@ -153,12 +160,17 @@ class Level2 extends Phaser.Scene {
         this.player.updateScore(this, parseInt(localStorage.getItem("pts")));
     }
 
+    hitPlayer(player, enemy) {
+        this.SndExplosion.play(this.sound);
+        player.hitted(this, enemy);
+    }
+
     finalBoss() {
-        console.log("Puntos de player: " + parseInt(localStorage.getItem("pts")));
+        //console.log("Puntos de player: " + parseInt(localStorage.getItem("pts")));
 
         if (parseInt(localStorage.getItem("pts")) > 500) {
 
-            console.log("Boss entry");
+            //console.log("Check boss entry");
 
             this.enemies.clear(true); // Remove all Children.
 
@@ -172,6 +184,46 @@ class Level2 extends Phaser.Scene {
                 speed: (Math.random() * 2) + 1
             });
 
+        }
+    }
+
+    win() {
+
+        //console.log("Check win")
+
+        if (parseInt(localStorage.getItem("pts")) > 1500) {
+
+            this.music.stop(); //Stop the music
+            this.scene.stop("HUD"); //Stop the HUD
+            this.scene.start("Win"); //Redirect win scene
+
+            var delayInMilliseconds = 5000; //5 second for delay
+
+            //Clear all variables for the next game + delay for winner scene
+            setTimeout(function () {
+                location.reload();
+            }, delayInMilliseconds);
+
+        }
+
+    }
+
+    lose() {
+
+        //console.log("Check lives");
+
+        if (this.player.lives < 1) {
+
+            this.music.stop(); //Stop the music
+            this.scene.stop("HUD"); //Stop the HUD
+            this.scene.start("Lose"); //Redirect win scene
+
+            var delayInMilliseconds = 5000; //5 second for delay
+
+            //Clear all variables for the next game + delay for lose scene
+            setTimeout(function () {
+                location.reload();
+            }, delayInMilliseconds);
         }
     }
 

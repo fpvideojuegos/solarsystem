@@ -59,63 +59,109 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  updateScore(scene, pts){
+  updateScore(scene, pts) {
     this.score = this.score + pts;
     scene.events.emit("scoreChange", this);
   }
 
-  updateLives(scene, hp){
+  updateLives(scene, hp) {
     this.lives = this.lives + (hp);
     scene.events.emit("livesChange", this);
   }
-      //Configure cursor key movements
-      movePlayerManagerCursorKeys() {
+  //Configure cursor key movements
+  movePlayerManagerCursorKeys() {
 
-        this.body.setVelocity(0);
+    this.body.setVelocity(0);
 
-        if (this.cursorKeys.left.isDown) {
+    if (this.cursorKeys.left.isDown) {
 
-          this.body.setVelocityX(-gameSettings.playerSpeed);
+      this.body.setVelocityX(-gameSettings.playerSpeed);
 
-        } else if (this.cursorKeys.right.isDown) {
+    } else if (this.cursorKeys.right.isDown) {
 
-          this.body.setVelocityX(gameSettings.playerSpeed);
-        }
+      this.body.setVelocityX(gameSettings.playerSpeed);
+    }
 
-        if (this.cursorKeys.up.isDown) {
+    if (this.cursorKeys.up.isDown) {
 
-          this.body.setVelocityY(-gameSettings.playerSpeed);
+      this.body.setVelocityY(-gameSettings.playerSpeed);
 
-        } else if (this.cursorKeys.down.isDown) {
+    } else if (this.cursorKeys.down.isDown) {
 
-          this.body.setVelocityY(gameSettings.playerSpeed);
+      this.body.setVelocityY(gameSettings.playerSpeed);
 
-        }
+    }
+  }
+
+  hitted(scene, enemy) {
+    if (this.alpha == 1) {
+      enemy.resetEnemy();
+      if (this.alpha < 1) {
+        return;
       }
+      this.alpha = 0.4;
+      this.disableBody(true, true);
 
-      //Configure WASD movements
-      movePlayerManagerWithWasd() {
+      scene.time.addEvent({
+        delay: 1000,
+        callback: () => {
+          this.reset(scene);
+        },
+        callbackScope: this,
+        loop: false
+      });
 
-        this.body.setVelocity(0);
+      //Actualiza las vidas
+      this.updateLives(scene, -1)
+    }
+  }
 
-        if (this.WASD.WASD_LEFT.isDown) {
+  //Animacion de aparición
+  reset(scene) {
+    if (this.lives > 0) {
+      var x = config.width / 2 - 8;
+      var y = config.height + 64;
+      this.enableBody(true, x, y, true, true);
 
-          this.body.setVelocityX(-gameSettings.playerSpeed);
+      this.alpha = 0.5;
 
-        } else if (this.WASD.WASD_RIGHT.isDown) {
+      var tween = scene.tweens.add({
+        targets: this,
+        y: config.height - 64,
+        ease: 'Power1',
+        duration: 1500,
+        repeat: 0,
+        onComplete: function () {
+          this.alpha = 1;
+        },
+        callbackScope: this
+      });
+    }
+  }
 
-          this.body.setVelocityX(gameSettings.playerSpeed);
+  //Configure WASD movements
+  movePlayerManagerWithWasd() {
 
-        }
+    this.body.setVelocity(0);
 
-        if (this.WASD.WASD_UP.isDown) {
+    if (this.WASD.WASD_LEFT.isDown) {
 
-          this.body.setVelocityY(-gameSettings.playerSpeed);
+      this.body.setVelocityX(-gameSettings.playerSpeed);
 
-        } else if (this.WASD.WASD_DOWN.isDown) {
+    } else if (this.WASD.WASD_RIGHT.isDown) {
 
-          this.body.setVelocityY(gameSettings.playerSpeed);
+      this.body.setVelocityX(gameSettings.playerSpeed);
 
-        }
-      }
-    };
+    }
+
+    if (this.WASD.WASD_UP.isDown) {
+
+      this.body.setVelocityY(-gameSettings.playerSpeed);
+
+    } else if (this.WASD.WASD_DOWN.isDown) {
+
+      this.body.setVelocityY(gameSettings.playerSpeed);
+
+    }
+  }
+};

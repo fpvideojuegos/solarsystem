@@ -3,10 +3,9 @@ class JetZ extends Enemy {
         super(config);
 
         this.position = config.posi;
-        console.log(this.position)
 
         //Animation
-        this.play("AnimJetZ");
+        this.play("AnimJetZLeft");
     }
 
     //Movimiento de la nave
@@ -14,8 +13,10 @@ class JetZ extends Enemy {
         this.y += this.speed;
 
         if(parseInt(this.y/50) % 2 == 0){
+            this.play("AnimJetZLeft");
             this.x += this.speed;
         }else{
+            this.play("AnimJetZRight");
             this.x -= this.speed;
         }
         if (this.y > config.height) {

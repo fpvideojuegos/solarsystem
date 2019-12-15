@@ -96,6 +96,8 @@ class Preload extends Phaser.Scene {
         this.load.audio("SndPowerup", ["assets/sounds/Snd_Powerup.ogg", "assets/sounds/Snd_Powerup.mp3"]);
         //shoot Audio
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
+        //shoot Audio
+        this.load.audio("MusLose", ["assets/sounds/Mus_Game_Over.ogg", "assets/sounds/Mus_Game_Over.mp3"]);
 
     } //FINAL PRELOAD
 
@@ -140,10 +142,20 @@ class Preload extends Phaser.Scene {
 
         //jet-Z Animation
         this.anims.create({
-            key: "AnimJetZ",
+            key: "AnimJetZLeft",
             frames: this.anims.generateFrameNumbers("JetZ", {
                 start: 0,
-                end: 0,
+                end: 1,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+        //jet-Z Animation
+        this.anims.create({
+            key: "AnimJetZRight",
+            frames: this.anims.generateFrameNumbers("JetZ", {
+                start: 2,
+                end: 3,
             }),
             frameRate: 20,
             repeat: -1
