@@ -6,14 +6,18 @@ class Preload extends Phaser.Scene {
     ///////////  PRECARGA  ///////////
     preload() {
 
-        //Background Image
-        this.load.image("Back", "assets/images/Back.png");
+        ////// BACKGROUNDS //////
+        //Mercury
+        this.load.image("bgMercury", "assets/images/bgMercury.png");
+        //Saturn
+        this.load.image("bgSaturn", "assets/images/bgSaturn.png");
 
-        //pixel font
-        this.load.image('pixel', 'assets/font/pixelfont.png');
-        this.load.json('pixel_json', 'assets/font/pixelfont.json');
+        ////// FONTS //////
+        //this.load.bitmapFont("pixelFont", "assets/font/fonPixel.png", "assets/font/fonPixel.fnt"); //Desactivada por falta numeros
+        this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml"); //Por defecto
 
-        //Create Loading Bar
+
+        /////// LOADING BAR //////
         this.fullBar = this.add.graphics();
         this.fullBar.fillStyle(0x660066, 1);
         this.fullBar.fillRect((this.cameras.main.width / 4) - 2, (this.cameras.main.height / 2) - 18, (this.cameras.main.width / 2) + 4, 20);
@@ -32,21 +36,27 @@ class Preload extends Phaser.Scene {
 
         //// SPRITESHEETS ////
         //Player
-        this.load.spritesheet("player", "assets/spritesheets/player.png", {
-            frameWidth: 16,
+        this.load.spritesheet("player", "assets/spritesheets/nave.png", {
+            frameWidth: 24,
             frameHeight: 24
         });
 
-        //Enemy
-        this.load.spritesheet("Boss", "assets/spritesheets/bounty-hunter.png", {
-            frameWidth: 140,
-            frameHeight: 127
-        });
-
-        //Boss
+        //Basic
         this.load.spritesheet("Enemy", "assets/spritesheets/enemy.png", {
             frameWidth: 24,
             frameHeight: 24
+        });
+
+        //Jet-Z
+        this.load.spritesheet("JetZ", "assets/spritesheets/lemon.png", {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+
+        //Bounty hunter
+        this.load.spritesheet("hunter", "assets/spritesheets/boss.png", {
+            frameWidth: 68,
+            frameHeight: 68
         });
 
         //Shoot
@@ -61,45 +71,39 @@ class Preload extends Phaser.Scene {
             frameHeight: 20
         });
 
-        //Mercurio
-        this.load.spritesheet("Mercurio", "sprites/mercury.png", {
+        //Mercury
+        this.load.spritesheet("Mercurio", "assets/images/mercury.png", {
             frameWidth: 60,
             frameHeight: 60
         });
 
-        //Saturno
-        this.load.spritesheet("Saturno", "sprites/saturn.png", {
+        //Saturn
+        this.load.spritesheet("Saturno", "assets/images/saturn.png", {
             frameWidth: 120,
             frameHeight: 200
         });
 
-        //
-
-
         ////AUDIO////
         //Main Menu
         this.load.audio("MusMenu", ["assets/sounds/Mus_Menu.ogg", "assets/sounds/Mus_Menu.mp3"]);
+        //Main Menu
+        this.load.audio("MusLevel1", ["assets/sounds/Mus_Nivel1.ogg", "assets/sounds/Mus_Nivel1.mp3"]);
+        //Main Menu
+        this.load.audio("MusLevel2", ["assets/sounds/Mus_Nivel2.ogg", "assets/sounds/Mus_Nivel2.mp3"]);
         //Explosion Audio
         this.load.audio("SndExplosion", ["assets/sounds/Snd_Explosion.ogg", "assets/sounds/Snd_Explosion.mp3"]);
         //PowerUp Audio
         this.load.audio("SndPowerup", ["assets/sounds/Snd_Powerup.ogg", "assets/sounds/Snd_Powerup.mp3"]);
         //shoot Audio
         this.load.audio("SndShoot", ["assets/sounds/Snd_Shoot.ogg", "assets/sounds/Snd_Shoot.mp3"]);
-
-        this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
-
-
+        //shoot Audio
+        this.load.audio("MusLose", ["assets/sounds/Mus_Game_Over.ogg", "assets/sounds/Mus_Game_Over.mp3"]);
 
     } //FINAL PRELOAD
 
 
     ///////////  CREATE  ///////////
     create() {
-
-        //cargamos la imagen y el json
-        let config = this.cache.json.get('pixel_json');
-        this.cache.bitmapFont.add('pixel', Phaser.GameObjects.RetroFont.Parse(this, config));
-
 
         this.scene.start("Menu"); //Primera escena del juego
 
@@ -108,7 +112,7 @@ class Preload extends Phaser.Scene {
             key: "playerR",
             frames: this.anims.generateFrameNumbers("player", {
                 start: 0,
-                end: 1,
+                end: 2,
             }),
             frameRate: 20,
             repeat: -1
@@ -136,10 +140,31 @@ class Preload extends Phaser.Scene {
             repeat: -1
         });
 
+        //jet-Z Animation
+        this.anims.create({
+            key: "AnimJetZLeft",
+            frames: this.anims.generateFrameNumbers("JetZ", {
+                start: 0,
+                end: 1,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+        //jet-Z Animation
+        this.anims.create({
+            key: "AnimJetZRight",
+            frames: this.anims.generateFrameNumbers("JetZ", {
+                start: 2,
+                end: 3,
+            }),
+            frameRate: 20,
+            repeat: -1
+        });
+
         //Boss Animation
         this.anims.create({
             key: "Boss",
-            frames: this.anims.generateFrameNumbers("Boss", {
+            frames: this.anims.generateFrameNumbers("hunter", {
                 start: 0,
                 end: 0,
             }),

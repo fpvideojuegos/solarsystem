@@ -10,7 +10,8 @@ class HUD extends Phaser.Scene {
         
         ///////////  BACKGROUND  ///////////
         this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x000000, 0.6);
+        this.graphics.fillStyle(0x000000, 0.6); //!!
+        // This apply after upload the project -> this.graphics.fillStyle(0xdddddd);
         this.graphics.beginPath();
         this.graphics.moveTo(0, 0);
         this.graphics.lineTo(config.width, 0);
@@ -22,7 +23,7 @@ class HUD extends Phaser.Scene {
 
         ///////////  TEXTOS  ///////////
         //Puntuaciones
-        this.score1 = this.add.bitmapText(170, 4, "pixelFont", "AAAA", 16);
+        this.score1 = this.add.bitmapText(170, 4, "pixelFont", "AAAA", 20);
 
         //Nombres
         this.p1 = this.add.bitmapText(75, 4, "pixelFont", "PLAYER 1", 16);
